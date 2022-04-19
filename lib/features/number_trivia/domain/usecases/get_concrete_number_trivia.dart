@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
 import 'package:test_driven_development/features/number_trivia/domain/repositories/number_repository.dart';
 import 'package:test_driven_development/features/number_trivia/number_trivia.dart';
 
