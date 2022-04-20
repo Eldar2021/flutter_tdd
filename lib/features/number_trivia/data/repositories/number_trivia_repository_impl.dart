@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
-import 'package:test_driven_development/core/error/exceptions.dart';
-import 'package:test_driven_development/features/number_trivia/data/models/number_trivia_model.dart';
+import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/platform/network_info.dart';
 import '../../domain/entities/number_trivia.dart';
 import '../../domain/repositories/number_repository.dart';
+import '../models/number_trivia_model.dart';
 import '../sourses/number_trivia_local_data_source.dart';
 import '../sourses/number_trivia_remote_data_source.dart';
 
