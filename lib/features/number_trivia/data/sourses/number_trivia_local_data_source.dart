@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
-import 'package:test_driven_development/core/error/exceptions.dart';
 
+import '../../../../core/error/exceptions.dart';
 import '../models/number_trivia_model.dart';
 
 abstract class NumberTriviaLocalDataSource {
