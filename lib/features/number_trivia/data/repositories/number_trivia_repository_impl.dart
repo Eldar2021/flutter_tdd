@@ -1,10 +1,17 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
+import 'package:test_driven_development/core/error/exceptions.dart';
+import 'package:test_driven_development/features/number_trivia/data/models/number_trivia_model.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/platform/network_info.dart';
 import '../../domain/entities/number_trivia.dart';
 import '../../domain/repositories/number_repository.dart';
 import '../sourses/number_trivia_local_data_source.dart';
 import '../sourses/number_trivia_remote_data_source.dart';
+
+// ignore: avoid_private_typedef_functions
+typedef _ChooseConcreteOrRandom = Future<NumberTriviaModel> Function();
 
 class NumberTriviaRepositoryImpl implements NumberTriviaRepository {
   NumberTriviaRepositoryImpl({
@@ -21,14 +28,36 @@ class NumberTriviaRepositoryImpl implements NumberTriviaRepository {
   Future<Either<Failure, NumBerTrivia>> getConcreateNumberTrivia(
     int number,
   ) async {
-    await networkInfo.isConnected;
-    return const Right<Failure, NumBerTrivia>(
-      NumBerTrivia(text: 'text', number: 1),
-    );
+    return _getTrivia(() async {
+      return remoteDataSource.getConcreteNumberTrivia(number);
+    });
   }
 
   @override
-  Future<Either<Failure, NumBerTrivia>> getRandomTrivia() {
-    throw UnimplementedError();
+  Future<Either<Failure, NumBerTrivia>> getRandomTrivia() async {
+    return _getTrivia(() async {
+      return remoteDataSource.getRandomNumberTrivia();
+    });
+  }
+
+  Future<Either<Failure, NumBerTrivia>> _getTrivia(
+    _ChooseConcreteOrRandom getConcreteOrRandon,
+  ) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final remoteTrivia = await getConcreteOrRandon();
+        await localDataSource.cacheNumberTrivia(remoteTrivia);
+        return Right(remoteTrivia);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      try {
+        final localTrivia = await localDataSource.getLastNumberTrivia();
+        return Right(localTrivia);
+      } on CacheException {
+        return Left(CacheFailure());
+      }
+    }
   }
 }
