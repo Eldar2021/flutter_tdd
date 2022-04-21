@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/exceptions.dart';
@@ -10,9 +9,6 @@ import '../../domain/repositories/number_repository.dart';
 import '../models/number_trivia_model.dart';
 import '../sourses/number_trivia_local_data_source.dart';
 import '../sourses/number_trivia_remote_data_source.dart';
-
-// ignore: avoid_private_typedef_functions
-typedef _ChooseConcreteOrRandom = Future<NumberTriviaModel> Function();
 
 class NumberTriviaRepositoryImpl implements NumberTriviaRepository {
   NumberTriviaRepositoryImpl({
@@ -42,7 +38,7 @@ class NumberTriviaRepositoryImpl implements NumberTriviaRepository {
   }
 
   Future<Either<Failure, NumBerTrivia>> _getTrivia(
-    _ChooseConcreteOrRandom getConcreteOrRandon,
+    Future<NumberTriviaModel> Function() getConcreteOrRandon,
   ) async {
     if (await networkInfo.isConnected) {
       try {
