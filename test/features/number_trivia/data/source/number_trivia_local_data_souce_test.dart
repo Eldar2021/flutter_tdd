@@ -60,7 +60,7 @@ void main() {
 
         await dataSource.cacheNumberTrivia(numberTriviaModel);
 
-        verify(() => mockHiveBox.put('Trivia', numberTriviaModel));
+        verifyNever(() => mockHiveBox.put('Trivia', numberTriviaModel));
       },
     );
   });

@@ -7,7 +7,7 @@ import 'core/lactor/service_locator.dart' as lacator;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  lacator.appInit();
+  await lacator.appInit();
   final appDocumentDir = await path.getApplicationDocumentsDirectory();
   Hive.init(appDocumentDir.path);
   await bootstrap(() => const App());

@@ -26,7 +26,7 @@ class NumberTriviaLocalDataSourceImpl implements NumberTriviaLocalDataSource {
 
   @override
   Future<void> cacheNumberTrivia(NumberTriviaModel triviaToCache) async {
-    await hiveBox.put('Trivia', triviaToCache);
+    // await hiveBox.put('Trivia', triviaToCache);
     return;
   }
 }

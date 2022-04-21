@@ -1,3 +1,5 @@
+// ignore_for_file: cascade_invocations
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -27,11 +29,9 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
           return 'some error';
       }
     }
-
     on<NumberTriviaEvent>((event, emit) {});
     on<GetConcreteNumber>((event, emit) async {
       final either = inputConverter.stringToInt(event.numberString);
-      // ignore: cascade_invocations
       either.fold(
         (l) => emit(const ErrorState('error state')),
         (r) async {

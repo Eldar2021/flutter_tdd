@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart' as path;
+
 import 'app/app.dart';
 import 'bootstrap.dart';
 import 'core/lactor/service_locator.dart' as lacator;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  lacator.appInit();
+  await lacator.appInit();
   final appDocumentDir = await path.getApplicationDocumentsDirectory();
   Hive.init(appDocumentDir.path);
   await bootstrap(() => const App());
