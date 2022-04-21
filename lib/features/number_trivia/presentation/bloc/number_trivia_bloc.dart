@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:test_driven_development/core/error/failures.dart';
-import 'package:test_driven_development/core/usecase/usecase.dart';
 
+import '../../../../core/error/failures.dart';
+import '../../../../core/usecase/usecase.dart';
 import '../../../../core/utils/input_convert.dart';
 import '../../domain/entities/number_trivia.dart';
 import '../../domain/usecases/get_concrete_number_trivia.dart';

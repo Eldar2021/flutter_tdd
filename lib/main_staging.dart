@@ -1,13 +1,14 @@
-// Copyright (c) 2022, Very Good Ventures
-// https://verygood.ventures
-//
-// Use of this source code is governed by an MIT-style
-// license that can be found in the LICENSE file or at
-// https://opensource.org/licenses/MIT.
+import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart' as path;
+import 'app/app.dart';
+import 'bootstrap.dart';
+import 'core/lactor/service_locator.dart' as lacator;
 
-import 'package:test_driven_development/app/app.dart';
-import 'package:test_driven_development/bootstrap.dart';
-
-void main() {
-  bootstrap(() => const App());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  lacator.appInit();
+  final appDocumentDir = await path.getApplicationDocumentsDirectory();
+  Hive.init(appDocumentDir.path);
+  await bootstrap(() => const App());
 }
