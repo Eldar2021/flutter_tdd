@@ -10,12 +10,9 @@ class NumberTriviaPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('NumberTrivia')),
-      body: BlocProvider<NumberTriviaBloc>(
-        create: (context) => sl<NumberTriviaBloc>(),
-        child: SingleChildScrollView(child: NumberTriviaScreen()),
-      ),
+    return BlocProvider(
+      create: (_) => sl<NumberTriviaBloc>(),
+      child: NumberTriviaScreen(),
     );
   }
 }

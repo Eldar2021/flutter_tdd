@@ -10,92 +10,97 @@ class NumberTriviaScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: Column(
-        children: [
-          const SizedBox(height: 20),
-          Center(
-            child: BlocBuilder<NumberTriviaBloc, NumberTriviaState>(
-              builder: (context, state) {
-                if (state is EmptyState) {
-                  return const NumberText('Empty');
-                } else if (state is LoadingState) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (state is SuccessState) {
-                  return NumberText(state.trivia.number.toString());
-                } else if (state is ErrorState) {
-                  return const NumberText('NotFound');
-                } else {
-                  return const NumberText('State is not fount');
-                }
-              },
-            ),
-          ),
-          const SizedBox(height: 30),
-          SizedBox(
-            height: MediaQuery.of(context).size.height / 3,
-            child: SingleChildScrollView(
-              child: BlocBuilder<NumberTriviaBloc, NumberTriviaState>(
-                builder: (context, state) {
-                  if (state is EmptyState) {
-                    return const MassageText('Number Trivia');
-                  } else if (state is LoadingState) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (state is SuccessState) {
-                    return MassageText(state.trivia.text);
-                  } else if (state is ErrorState) {
-                    return MassageText(state.message);
-                  } else {
-                    return const MassageText('State is not fount');
-                  }
-                },
-              ),
-            ),
-          ),
-          const SizedBox(height: 30),
-          TextField(
-            controller: controller,
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: 'Search text',
-              filled: true,
-              fillColor: Colors.grey,
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.red),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              enabledBorder: UnderlineInputBorder(
-                borderSide: const BorderSide(color: Colors.grey),
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-          ),
-          const SizedBox(height: 30),
-          Row(
+    return Scaffold(
+      appBar: AppBar(title: const Text('NumberTrivia')),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
             children: [
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {
-                    context.read<NumberTriviaBloc>().add(
-                          GetConcreteNumber(controller.text),
-                        );
+              const SizedBox(height: 20),
+              Center(
+                child: BlocBuilder<NumberTriviaBloc, NumberTriviaState>(
+                  builder: (context, state) {
+                    if (state is EmptyState) {
+                      return const NumberText('Empty');
+                    } else if (state is LoadingState) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (state is SuccessState) {
+                      return NumberText(state.trivia.number.toString());
+                    } else if (state is ErrorState) {
+                      return const NumberText('NotFound');
+                    } else {
+                      return const NumberText('State is not fount');
+                    }
                   },
-                  child: const Text('Search'),
                 ),
               ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {
-                    context.read<NumberTriviaBloc>().add(GetRandomNumber());
-                  },
-                  child: const Text('Search'),
+              const SizedBox(height: 30),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 3,
+                child: SingleChildScrollView(
+                  child: BlocBuilder<NumberTriviaBloc, NumberTriviaState>(
+                    builder: (context, state) {
+                      if (state is EmptyState) {
+                        return const MassageText('Number Trivia');
+                      } else if (state is LoadingState) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else if (state is SuccessState) {
+                        return MassageText(state.trivia.text);
+                      } else if (state is ErrorState) {
+                        return MassageText(state.message);
+                      } else {
+                        return const MassageText('State is not fount');
+                      }
+                    },
+                  ),
                 ),
               ),
+              const SizedBox(height: 30),
+              TextField(
+                controller: controller,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Search text',
+                  filled: true,
+                  fillColor: Colors.grey,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.red),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 30),
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        context.read<NumberTriviaBloc>().add(
+                              GetConcreteNumber(controller.text),
+                            );
+                      },
+                      child: const Text('Search'),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        context.read<NumberTriviaBloc>().add(GetRandomNumber());
+                      },
+                      child: const Text('Search'),
+                    ),
+                  ),
+                ],
+              )
             ],
-          )
-        ],
+          ),
+        ),
       ),
     );
   }
