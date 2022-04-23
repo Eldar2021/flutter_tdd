@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:test_driven_development/core/utils/input_convert.dart';
+import 'package:test_driven_development/features/number_trivia/presentation/cubit/numbertriviacubit_cubit.dart';
 
 import '../../features/number_trivia/data/models/number_trivia_model.dart';
 import '../../features/number_trivia/data/repositories/number_trivia_repository_impl.dart';
@@ -18,6 +19,13 @@ final sl = GetIt.I;
 
 Future<void> appInit() async {
   sl
+    ..registerFactory(
+      () => NumbertriviacubitCubit(
+        getConcreteNumberTrivia: sl(),
+        getRandomNumberTrivia: sl(),
+        inputConverter: sl(),
+      ),
+    )
     ..registerFactory(
       () => NumberTriviaBloc(
         getConcreteNumberTrivia: sl(),

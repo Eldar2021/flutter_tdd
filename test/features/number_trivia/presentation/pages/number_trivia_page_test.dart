@@ -5,7 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test_driven_development/core/lactor/service_locator.dart';
 import 'package:test_driven_development/features/number_trivia/data/models/number_trivia_model.dart';
-import 'package:test_driven_development/features/number_trivia/presentation/bloc/number_trivia_bloc.dart';
+import 'package:test_driven_development/features/number_trivia/presentation/cubit/numbertriviacubit_cubit.dart';
 import 'package:test_driven_development/features/number_trivia/presentation/pages/number_trivia_page.dart';
 import 'package:test_driven_development/features/number_trivia/presentation/pages/screen/number_trivia_screen.dart';
 
@@ -27,14 +27,14 @@ void main() {
 
   /// _________NumberTriviaScreen__________ ///
   group('NumberTriviaScreen', () {
-    late NumberTriviaBloc triviaBloc;
+    late NumbertriviacubitCubit triviaCubit;
 
     setUp(() {
-      triviaBloc = MockNumberTriviaBloc();
+      triviaCubit = MockNumbertriviacubitCubit();
     });
 
     final page = BlocProvider(
-      create: (_) => triviaBloc,
+      create: (_) => triviaCubit,
       child: NumberTriviaScreen(),
     );
 
@@ -42,7 +42,7 @@ void main() {
       'render initail state',
       (tester) async {
         final state = EmptyState();
-        when(() => triviaBloc.state).thenReturn(state);
+        when(() => triviaCubit.state).thenReturn(state);
         await tester.pumpApp(page);
         expect(find.text('NumberTrivia'), findsOneWidget);
         expect(find.byType(SingleChildScrollView), findsWidgets);
@@ -53,7 +53,7 @@ void main() {
       'render Error state',
       (tester) async {
         const state = ErrorState('error text');
-        when(() => triviaBloc.state).thenReturn(state);
+        when(() => triviaCubit.state).thenReturn(state);
         await tester.pumpApp(page);
         expect(find.text('NumberTrivia'), findsOneWidget);
         expect(find.byType(MassageText), findsWidgets);

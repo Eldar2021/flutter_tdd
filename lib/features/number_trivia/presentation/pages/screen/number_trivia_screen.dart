@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../bloc/number_trivia_bloc.dart';
+import '../../cubit/numbertriviacubit_cubit.dart';
 
 class NumberTriviaScreen extends StatelessWidget {
   NumberTriviaScreen({Key? key}) : super(key: key);
@@ -19,7 +19,8 @@ class NumberTriviaScreen extends StatelessWidget {
             children: [
               const SizedBox(height: 20),
               Center(
-                child: BlocBuilder<NumberTriviaBloc, NumberTriviaState>(
+                child:
+                    BlocBuilder<NumbertriviacubitCubit, NumbertriviacubitState>(
                   builder: (context, state) {
                     if (state is EmptyState) {
                       return const NumberText('Empty');
@@ -39,7 +40,8 @@ class NumberTriviaScreen extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 3,
                 child: SingleChildScrollView(
-                  child: BlocBuilder<NumberTriviaBloc, NumberTriviaState>(
+                  child: BlocBuilder<NumbertriviacubitCubit,
+                      NumbertriviacubitState>(
                     builder: (context, state) {
                       if (state is EmptyState) {
                         return const MassageText('Number Trivia');
@@ -80,9 +82,9 @@ class NumberTriviaScreen extends StatelessWidget {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        context.read<NumberTriviaBloc>().add(
-                              GetConcreteNumber(controller.text),
-                            );
+                        context
+                            .read<NumbertriviacubitCubit>()
+                            .getConcreteNumber(controller.text);
                       },
                       child: const Text('Search'),
                     ),
@@ -91,7 +93,9 @@ class NumberTriviaScreen extends StatelessWidget {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        context.read<NumberTriviaBloc>().add(GetRandomNumber());
+                        context
+                            .read<NumbertriviacubitCubit>()
+                            .getRandomNumber();
                       },
                       child: const Text('Search'),
                     ),

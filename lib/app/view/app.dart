@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:test_driven_development/counter/counter.dart';
+import 'package:test_driven_development/features/number_trivia/presentation/pages/number_trivia_page.dart';
 
 import '../../l10n/l10n.dart';
 
@@ -22,7 +22,7 @@ class App extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
+      home: const NumberTriviaPage(),
     );
   }
 }

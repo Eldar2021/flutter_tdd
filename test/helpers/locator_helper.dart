@@ -13,6 +13,7 @@ import 'package:test_driven_development/features/number_trivia/domain/repositori
 import 'package:test_driven_development/features/number_trivia/domain/usecases/get_concrete_number_trivia.dart';
 import 'package:test_driven_development/features/number_trivia/domain/usecases/get_random_number_trivia.dart';
 import 'package:test_driven_development/features/number_trivia/presentation/bloc/number_trivia_bloc.dart';
+import 'package:test_driven_development/features/number_trivia/presentation/cubit/numbertriviacubit_cubit.dart';
 
 final slTest = GetIt.I;
 
@@ -44,6 +45,9 @@ Future<void> appTestInit() async {
 class MockNumberTriviaBloc
     extends MockBloc<NumberTriviaEvent, NumberTriviaState>
     implements NumberTriviaBloc {}
+
+class MockNumbertriviacubitCubit extends MockCubit<NumbertriviacubitState>
+    implements NumbertriviacubitCubit {}
 
 class MockGetConcreteNumberTrivia extends Mock
     implements GetConcreteNumberTrivia {}
