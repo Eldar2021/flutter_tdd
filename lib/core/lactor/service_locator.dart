@@ -2,8 +2,6 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
-import 'package:test_driven_development/core/utils/input_convert.dart';
-import 'package:test_driven_development/features/number_trivia/presentation/cubit/numbertriviacubit_cubit.dart';
 
 import '../../features/number_trivia/data/models/number_trivia_model.dart';
 import '../../features/number_trivia/data/repositories/number_trivia_repository_impl.dart';
@@ -13,7 +11,9 @@ import '../../features/number_trivia/domain/repositories/number_repository.dart'
 import '../../features/number_trivia/domain/usecases/get_concrete_number_trivia.dart';
 import '../../features/number_trivia/domain/usecases/get_random_number_trivia.dart';
 import '../../features/number_trivia/presentation/bloc/number_trivia_bloc.dart';
+import '../../features/number_trivia/presentation/cubit/numbertriviacubit_cubit.dart';
 import '../platform/network_info.dart';
+import '../utils/input_convert.dart';
 
 final sl = GetIt.I;
 

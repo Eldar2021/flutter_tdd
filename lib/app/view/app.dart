@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:test_driven_development/features/number_trivia/presentation/pages/number_trivia_page.dart';
 
+import '../../features/number_trivia/presentation/pages/number_trivia_page.dart';
 import '../../l10n/l10n.dart';
 
 class App extends StatelessWidget {
